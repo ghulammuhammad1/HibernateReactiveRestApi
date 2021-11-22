@@ -1,9 +1,5 @@
 package org.acme.getting.started;
-
-import java.net.URI;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -16,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.smallrye.mutiny.Uni;
@@ -37,12 +34,18 @@ public class PersonController {
         return Person.listAll();
     }
 
-    @POST
-    @Path("/search/{id}")
-    public Uni<Person> findById(@PathParam("id") Long id){
-        return Person.findById(id);
-    }
-
+    // @POST
+    // @Path("/search/{id}")
+    // public Uni<Person> findById(@PathParam("id") Long id){
+    //     System.out.println("ID"+id);
+    //     return Person.findById(id);
+    // }
+@POST
+@Path("/search")
+public Uni<Person> FindID(long id){
+    System.out.println("ID" + id);
+    return Person.findById(id);
+}
     @DELETE
     @Path("/{id}")
     public Uni<Response> delete(@PathParam("id") Long id) {
@@ -52,8 +55,6 @@ public class PersonController {
                 );
          
     }
-
-   
 
     @PUT
     @Path("/{id}")
